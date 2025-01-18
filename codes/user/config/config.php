@@ -5,7 +5,7 @@
 $databaseHost = 'localhost';
 $databaseUsername = 'root';
 $databasePassword = '';
-$databaseName = 'minicafe';
+$databaseName = 'campsite';
 $url = "http://localhost/campsite"; 
 define('BASE_URL', 'http://localhost/campsite/');
 define('BASE_PATH', __DIR__);
