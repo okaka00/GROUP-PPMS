@@ -14,57 +14,50 @@ CREATE TABLE `user` (
   FOREIGN KEY (`roleID`) REFERENCES `userRole` (`roleID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- updated by Afiqah
+-- Table structure for table `zone`
+CREATE TABLE zone (
+    zoneID VARCHAR(5) PRIMARY KEY,
+    zoneDesc TEXT NOT NULL,        
+    zoneImg VARCHAR(255)          
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- updated by Afiqah
 -- Table structure for table `campsite`
-CREATE TABLE `campsite` (
-  `campsiteID` int PRIMARY KEY,
-  `campsiteName` varchar(255) NOT NULL,
-  `pricePerNight` decimal(10,2) NOT NULL,
-  `campDesc` varchar(225) NOT NULL,
-  `campsiteImg` varchar(225) NOT NULL,
-  `availabilityStatus` boolean NOT NULL
+CREATE TABLE campsite (
+    campsiteID VARCHAR(10) PRIMARY KEY,       
+    pricePerNight DECIMAL(10, 2) NOT NULL,   
+    zoneID VARCHAR(5),                       
+    FOREIGN KEY (zoneID) REFERENCES zone(zoneID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Table structure for table `reservation`
-CREATE TABLE `reservation` (
-  `reservationID` int PRIMARY KEY,
-  `userID` int NOT NULL,
-  `campsiteID` int NOT NULL,
-  `startDate` date NOT NULL,
-  `endDate` date NOT NULL,
-  `reservationAmt` decimal(10,2) NOT NULL,
-  FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
-  FOREIGN KEY (`campsiteID`) REFERENCES `campsite` (`campsiteID`)
+-- updated by Afiqah
+-- Table structure for table `toolCategory`
+CREATE TABLE `toolCategory` (
+  `categoryID` int PRIMARY KEY,
+  `categoryName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Table structure for table `groupBooking`
-CREATE TABLE `groupBooking` (
-  `bookingID` int PRIMARY KEY,
-  `groupCategory` varchar(100) NOT NULL,
-  `bookingAmt` decimal(10,2) NOT NULL,
-  `reservationID` int NOT NULL,
-  `costSplit` json NOT NULL, -- Stores cost split among group members
-  FOREIGN KEY (`reservationID`) REFERENCES `reservation` (`reservationID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 -- Table structure for table `tool`
 CREATE TABLE `tool` (
   `toolID` int PRIMARY KEY,
   `toolName` varchar(100) NOT NULL,
   `toolDesc` varchar(225) NOT NULL,
-  `toolAvailability` boolean NOT NULL,
   `toolImg` varchar(225) NOT NULL,
   `pricePerDay` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- updated by Afiqah
 -- Table structure for table `rental`
 CREATE TABLE `rental` (
   `rentalID` int PRIMARY KEY,
   `toolID` int NOT NULL,
+  `campsiteID` VARCHAR(10) NOT NULL,
   `userID` int NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
   `rentalAmt` decimal(10,2) NOT NULL,
+  FOREIGN KEY (`campsiteID`) REFERENCES `campsite` (`campsiteID`),
   FOREIGN KEY (`toolID`) REFERENCES `tool` (`toolID`),
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -85,8 +78,6 @@ CREATE TABLE `memories` (
   `memoryDate` date NOT NULL,
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 
 -- Table structure for table `review`
 CREATE TABLE `review` (
