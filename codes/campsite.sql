@@ -46,7 +46,8 @@ CREATE TABLE `tool` (
   `toolDesc` varchar(225) NOT NULL,
   `toolImg` varchar(225) NOT NULL,
   `categoryID` int NOT NULL,
-  `pricePerDay` decimal(10,2) NOT NULL
+  `pricePerDay` decimal(10,2) NOT NULL,
+  FOREIGN KEY (`categoryID`) REFERENCES `toolCategory` (`categoryID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- updated by Afiqah
@@ -85,8 +86,8 @@ CREATE TABLE `memories` (
 CREATE TABLE `review` (
   `reviewID` int PRIMARY KEY,
   `userID` int NOT NULL,
-  `rating` int CHECK (rating BETWEEN 1 AND 5),
-  `campsiteID` int NOT NULL,
+  `rating` int,
+  `campsiteID` VARCHAR(10) NOT NULL,
   `comment` text,
   `reviewDate` date NOT NULL,
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
