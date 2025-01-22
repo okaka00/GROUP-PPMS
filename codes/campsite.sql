@@ -60,6 +60,7 @@ CREATE TABLE `rental` (
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
   `rentalAmt` decimal(10,2) NOT NULL,
+  `rentalStatus` ENUM('Pending', 'Completed', 'Cancelled') NOT NULL DEFAULT 'Pending',
   FOREIGN KEY (`campsiteID`) REFERENCES `campsite` (`campsiteID`),
   FOREIGN KEY (`toolID`) REFERENCES `tool` (`toolID`),
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
