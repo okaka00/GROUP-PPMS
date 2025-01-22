@@ -26,7 +26,7 @@ CREATE TABLE zone (
 -- Table structure for table `campsite`
 CREATE TABLE campsite (
     campsiteID VARCHAR(10) PRIMARY KEY,       
-    pricePerNight DECIMAL(10, 2) NOT NULL,   
+    campsitePrice DECIMAL(10, 2) NOT NULL,   
     zoneID VARCHAR(5),                       
     FOREIGN KEY (zoneID) REFERENCES zone(zoneID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
