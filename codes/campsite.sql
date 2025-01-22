@@ -88,9 +88,9 @@ CREATE TABLE `review` (
   `reviewID` int PRIMARY KEY,
   `userID` int NOT NULL,
   `rating` int,
-  `campsiteID` VARCHAR(10) NOT NULL,
+  `rentalID` int NOT NULL,
   `comment` text,
   `reviewDate` date NOT NULL,
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
-  FOREIGN KEY (`campsiteID`) REFERENCES `campsite` (`campsiteID`)
+  FOREIGN KEY (`rentalID`) REFERENCES `rental` (`rentalID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
