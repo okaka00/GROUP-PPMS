@@ -38,12 +38,14 @@ CREATE TABLE `toolCategory` (
   `categoryName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- updated by Julia
 -- Table structure for table `tool`
 CREATE TABLE `tool` (
   `toolID` int PRIMARY KEY,
   `toolName` varchar(100) NOT NULL,
   `toolDesc` varchar(225) NOT NULL,
   `toolImg` varchar(225) NOT NULL,
+  `categoryID` int NOT NULL,
   `pricePerDay` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
