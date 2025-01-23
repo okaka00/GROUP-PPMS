@@ -120,6 +120,17 @@ table {
   padding: 15px; /* Adds padding for spacing */
 }
 
+footer {
+  background-color: #C2AC7D;
+  color: black;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px;
+  margin-top: 0; 
+  margin-bottom: 0;  
+}
+
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
   .row {
