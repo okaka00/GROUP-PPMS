@@ -106,18 +106,15 @@ ALTER TABLE `blog`
 ADD COLUMN `blogTitle` VARCHAR(255) NOT NULL AFTER `blogID`;
 
 -- Table structure for table `guidebook`
-CREATE TABLE `guidebook` (
-  `guidebookID` int PRIMARY KEY,
-  `guidebookURL` varchar(255) NOT NULL,
-  `guideDesc` TEXT,
-  `userID` int NOT NULL,
-  `createdDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `updatedDate` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE guidebook
-ADD COLUMN guidebookImg VARCHAR(255) NULL;
+CREATE TABLE guidebook (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    guidebookURL VARCHAR(255) NOT NULL,
+    guideDesc TEXT,
+    userID INT NOT NULL,
+    createdDate DATETIME NOT NULL,
+    updatedDate DATETIME NOT NULL,
+    guidebookImg VARCHAR(255)
+);
 
 -- Updated by Denish
 -- Table structure for table `aboutMembers`
