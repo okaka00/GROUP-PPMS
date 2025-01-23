@@ -8,7 +8,6 @@
                 
         <?php } else {  ?>
                         <!-- if no user in the session-->
-                <span>Welcome, <b><?php echo $_SESSION["userName"]; ?></b></span>
                 <a href="<?php echo BASE_URL; ?>" ><i class="fa fa-sign-in" style="font: size 12px;"></i>Login</a>
                         
         <?php }?>
