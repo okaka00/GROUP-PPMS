@@ -136,6 +136,205 @@ table {
 /*Afiqah update*/
 /*Julia update*/
 /*Maslinda Update*/
+/*=================================================
+  CSS for login , registration  , Forgot Password
+==================================================*/
+
+.login-popup,
+.reg-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.login-popup {
+  width: 300px;
+  padding: 15px;
+}
+
+.reg-popup {
+  width: 400px;
+  padding: 20px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.close-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.login-popup input[type = text],
+.login-popup input[type = password],
+.login-popup input[type = email],
+.reg-popup input [type = text],
+.reg-popup input [type = password],
+.reg-popup input [type = email]
+{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  background-color: green;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.reset-btn{
+  background-color: red;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.close-btn:hover{
+  opacity: 0.8;
+}
+
+/*=================================================
+  CSS for User Navigation
+==================================================*/
+
+
+.usernav {
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  text-align: center;
+  background-color: #08332C;
+}
+
+.logo-container {
+  padding: 10px;
+  flex: 10%;
+  text-align: left;
+}
+
+.search-container {
+  padding: 10px;
+  flex: 20%;
+}
+
+.user-links {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  color: #C2AC7D;
+}
+
+@media (max-width: 980px) {
+  .usernav {
+    flex-direction: column;
+  }
+  
+  .user-links{
+    justify-content: center;
+  }
+
+  .search-container{
+    margin :auto;
+  }
+
+  .logo-container{
+    margin:auto;
+  }
+}
+  
+
+.logo {
+  max-height: 50px;
+  width: auto;
+}
+
+.search-container form {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.search-container input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.search-container button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #C2AC7D ;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.search-container button:hover {
+  background-color: #868281;
+}
+
+.cart-icon {
+  font-size: 80px;
+  color: white;
+}
+
+.cart-button {
+  text-decoration: none;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.cart-button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+
 /*Nadea Update*/
 /*Diana update*/
 /*Denish Update*/
