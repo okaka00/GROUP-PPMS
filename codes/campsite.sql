@@ -31,11 +31,12 @@ CREATE TABLE campsite (
     FOREIGN KEY (zoneID) REFERENCES zone(zoneID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- updated by Afiqah
+-- updated by Afiqah,Julia
 -- Table structure for table `toolCategory`
 CREATE TABLE `toolCategory` (
   `categoryID` int PRIMARY KEY,
   `categoryName` varchar(100) NOT NULL
+  `categoryDesc` TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- updated by Julia
