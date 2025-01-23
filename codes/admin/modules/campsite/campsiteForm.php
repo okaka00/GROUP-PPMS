@@ -74,7 +74,7 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: gray;
         }
     </style>
 </head>
