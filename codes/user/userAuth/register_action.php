@@ -1,5 +1,9 @@
 <?php
 include("../config/config.php");
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -22,34 +26,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Password and confirm password do not match.");
     }
 
+	//create userID by incrementing 
+	$sql = "SELECT MAX(userID) AS maxID FROM user";
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$newID = $row['maxID'] + 1;
+
     //STEP 2: Check if userEmail already exist
 	$sql = "SELECT * FROM user WHERE userEmail='$userEmail' LIMIT 1";	
 	$result = mysqli_query($conn, $sql);
 	
     if (mysqli_num_rows($result) == 1) {
-		echo "<p ><b>Error: </b> User exist, please register a new user</p>";		
+		echo "<p ><b>Error: </b> User exist, please register a new user</p>";
+		header("Location: " . BASE_URL . "/index.php"); 		
 	} else {
 		// User does not exist, insert new user record, hash the password		
 		$pwdHash = trim(password_hash($_POST['userPwd'], PASSWORD_DEFAULT)); 
 		//echo $pwdHash;
-		$sql = "INSERT INTO user (userName, userEmail, userPwd ) VALUES ('$userName','$userEmail', '$pwdHash')";
+		$sql = "INSERT INTO user (userID, userName, userEmail, userPassword, roleID) VALUES ('$newID','$userName', '$userEmail', '$pwdHash', 2)";
 		if (mysqli_query($conn, $sql)) {
-			//echo "<p>New user record created successfully. Welcome <b>".$userName."</b></p>";
-			echo '<script type="text/javascript">		
-			alert("Registration successful, please Login!");
-			</script>';		
-			echo '<script type="text/javascript">
-            window.location.href = "' . BASE_URL . 'index.php";
-        	</script>';
-    	exit(); // Make sure to exit after performing the redirection		
-			//header("location:http://localhost/ppms/index.php"); 
-			//header('Location: ' . BASE_URL . '/index.php');
+                            // Redirect to index page after successful registration
+                            $_SESSION['success_message'] = "Registration successful! Please login.";
+                            header("Location: " . BASE_URL . "/index.php"); 
+                            exit();                        
 		} else {
 		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}	
 	}
 }
 mysqli_close($conn);
+
 ?>
+
+<script src="includes/modalAuth.js"></script>
 </body>
 </html>
