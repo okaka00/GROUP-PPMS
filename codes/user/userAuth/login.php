@@ -1,31 +1,17 @@
-<?php
-session_start();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Login</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-	<link rel="stylesheet" type="text/css" href="mystyle.css" media="screen" />
-</head>
-<body>
-<header>
-<div class="header">
-	<h1>PPMS | User Login</h1>
-</div>
-</header>
-<main>
-<form action="login_action.php" method="post">
-	<label for="userEmail">User Email:</label>
-	<input type="text" id="userEmail" name="userEmail" required><br><br>	
-	<label for="userPwd">Password:</label>
-	<input type="password" id="userPwd" name="userPwd" required><br><br>
-	<input type="submit" value="Login">
-	<input type="reset" value="Reset"></br>	
-</form>
-</main>
-<footer>
-</footer>
-</body>
-</html>
+		<!-- Login Popup -->
+		<div id="login-popup" class="login-popup">
+			<span class="close-btn" onclick="closeLoginPopup()">&times;</span>
+			<h3>User Login </h3>
+			<form action="userAuth/login_action.php" method="post">
+				<label for="userEmail">User Email:</label><br>
+				<input type="email" id="userEmail" name="userEmail" required><br><br>
+				<label for="userPwd">Password:</label><br>
+				<input type="password" id="userPwd" name="userPwd" required maxlength="8" autocomplete="off"><br><br>
+				<button type="submit" class="submit-btn" >LOGIN</button>
+				<button type="reset" class="reset-btn" value="Reset">RESET</button>
+			</form>
+			<p><a href="javascript:void(0);" onclick="openRegPopup();">| Registration </a> | Forgot Password |</p>
+		</div>
+		<!-- Overlay -->
+		<div id="overlay" class="overlay" onclick="closeLoginPopup();"></div>
+		<!-- End Login Popup -->
