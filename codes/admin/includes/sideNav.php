@@ -46,12 +46,27 @@
               <a href="<?php echo ADMIN_BASE_URL; ?>/modules/review/reviewList.php">Manage Review</a>
             </div>
 
+          <!-- Blog -->
+          <!-- NURULDIANA BINTI ZAIDI (BI22110211) -->
           <button class="dropdown-btn">Blog
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-container">
-            <a href="<?php echo ADMIN_BASE_URL; ?>/modules/review/reviewList.php">Manage Blog</a>
+            <a href="<?php echo ADMIN_BASE_URL; ?>/modules/blog/blogForm.php">Create Blog</a>
+            <a href="<?php echo ADMIN_BASE_URL; ?>/modules/blog/blogList.php">Manage Blog</a>
           </div>
+
+          
+          <!-- Guidebook -->
+          <!-- NURULDIANA BINTI ZAIDI (BI22110211) -->
+          <button class="dropdown-btn">Guidebook
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/guidebook/guidebookForm.php">Create Guidebook</a>
+                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/guidebook/guidebookList.php">Manage Guidebook</a>
+          </div>
+        </div>
 
           <button class="dropdown-btn">Memories
             <i class="fa fa-caret-down"></i>
@@ -60,12 +75,6 @@
             <a href="<?php echo ADMIN_BASE_URL; ?>/modules/review/reviewList.php">Manage Memories</a>
           </div>
 
-          <button class="dropdown-btn">Guidebook
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-container">
-            <a href="<?php echo ADMIN_BASE_URL; ?>/modules/review/reviewList.php">Manage Guidebook</a>
-          </div>
           <!-- About Members -->
           <!-- MOHAMAD DENISH JUMAD BIN JAMIL (BI22110263) -->
           <button class="dropdown-btn">About Members
