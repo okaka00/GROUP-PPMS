@@ -36,7 +36,7 @@ CREATE TABLE campsite (
 -- Table structure for table `toolCategory`
 CREATE TABLE `toolCategory` (
   `categoryID` int AUTO_INCREMENT PRIMARY KEY,
-  `categoryName` varchar(100) NOT NULL
+  `categoryName` varchar(100) NOT NULL,
   `categoryDesc` TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -99,7 +99,6 @@ CREATE TABLE `blog` (
   `updatedDate` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Updated by Diana
 -- Table structure for table `guidebook`
 CREATE TABLE `guidebook` (
   `guidebookID` int PRIMARY KEY,
