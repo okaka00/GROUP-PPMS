@@ -1,3 +1,4 @@
+
 -- Table structure for table `userRole`
 CREATE TABLE `userRole` (
   `roleID` int PRIMARY KEY,
@@ -67,14 +68,6 @@ CREATE TABLE `rental` (
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Table structure for table `guidebook`
-CREATE TABLE `guidebook` (
-  `guidebookID` int PRIMARY KEY,
-  `guidebookURL` varchar(255) NOT NULL,
-  `userID` int NOT NULL,
-  FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Table structure for table `memories`
 CREATE TABLE `memories` (
   `memoriesID` int PRIMARY KEY,
@@ -94,4 +87,26 @@ CREATE TABLE `review` (
   `reviewDate` date NOT NULL,
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
   FOREIGN KEY (`rentalID`) REFERENCES `rental` (`rentalID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Updated by Diana
+-- Table structure for table `blog`
+CREATE TABLE `blog` (
+  `blogID` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `blogEntry` text NOT NULL,
+  `blogImg` varchar(100) NOT NULL,
+  `createdBy` int(11) NOT NULL,
+  `updatedDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Updated by Diana
+-- Table structure for table `guidebook`
+CREATE TABLE `guidebook` (
+  `guidebookID` int PRIMARY KEY,
+  `guidebookURL` varchar(255) NOT NULL,
+  `guideDesc` TEXT,
+  `userID` int NOT NULL,
+  `createdDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updatedDate` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
