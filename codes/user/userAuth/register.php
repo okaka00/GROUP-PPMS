@@ -1,36 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Registration</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-	<link rel="stylesheet" type="text/css" href="mystyle.css" media="screen" />
-</head>
-<body>
-<header>
-<div class="header">
-	<h1>mySystem | User Registration </h1>
-</div>
-</header>
-<main>
-<form action="register_action.php" method="post">
-	<label for="userName">Username:</label>
-	<input type="text" id="userName" name="userName" required><br><br>
-
-	<label for="userEmail">User Email:</label>
-	<input type="email" id="userEmail" name="userEmail" required><br><br>
-
-	<label for="userPwd">Password:</label>
-	<input type="password" id="userPwd" name="userPwd" required maxlength="8"><br><br>
-
-	<label for="userPwd">Confirm Password:</label>
-	<input type="password" id="confirmPwd" name="confirmPwd" required><br><br>
-
-	<input type="submit" value="Register">
-	<input type="reset" value="Reset"></br>
-</form>
-</main>
-<footer>
-</footer>
-</body>
-</html>
+		<!-- Registration Popup -->
+		<div id="reg-popup" class="reg-popup">
+			<span class="close-btn" onclick="closeRegPopup()">&times;</span>
+			<h3>User Registration </h3>
+			<form action="userAuth/register_action.php" method="post">
+				<label for="reguserName">Username:</label><br>
+				<input type="text" id="reguserName" name="userName" required><br><br>
+				<label for="reguserEmail">User Email:</label><br>
+				<input type="email" id="reguserEmail" name="userEmail" required><br><br>
+				<label for="reguserPwd">Password:</label><br>
+				<input type="password" id="reguserPwd" name="userPwd" required maxlength="8"><br><br>
+				<label for="regconfirmPwd">Confirm Password:</label><br>
+				<input type="password" id="regconfirmPwd" name="confirmPwd" required><br><br>
+				<button type="submit" class="submit-btn" value="Register" >REGISTER</button>
+				<button type="reset" class="reset-btn" value="Reset">RESET</button>
+			</form>
+		</div>
+		<!-- Overlay -->
+		<div id="overlay" class="overlay" onclick="closeRegPopup()"></div>
+		<!-- End Registration Popup -->
