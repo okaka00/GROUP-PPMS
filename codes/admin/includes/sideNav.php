@@ -56,17 +56,15 @@
             <a href="<?php echo ADMIN_BASE_URL; ?>/modules/blog/blogList.php">Manage Blog</a>
           </div>
 
-          
-          <!-- Guidebook -->
+           <!-- Guidebook -->
           <!-- NURULDIANA BINTI ZAIDI (BI22110211) -->
           <button class="dropdown-btn">Guidebook
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-container">
-                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/guidebook/guidebookForm.php">Create Guidebook</a>
-                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/guidebook/guidebookList.php">Manage Guidebook</a>
+            <a href="<?php echo ADMIN_BASE_URL; ?>/modules/guidebook/guidebookForm.php">Create Guidebook</a>
+            <a href="<?php echo ADMIN_BASE_URL; ?>/modules/guidebook/guidebookList.php">Manage Guidebook</a>
           </div>
-        </div>
 
           <button class="dropdown-btn">Memories
             <i class="fa fa-caret-down"></i>
