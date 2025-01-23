@@ -99,6 +99,9 @@ CREATE TABLE `blog` (
   `updatedDate` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+ALTER TABLE `blog`
+  ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`createdBy`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 -- Table structure for table `guidebook`
 CREATE TABLE `guidebook` (
   `guidebookID` int PRIMARY KEY,
