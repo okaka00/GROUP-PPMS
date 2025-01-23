@@ -34,7 +34,7 @@ CREATE TABLE campsite (
 -- updated by Afiqah,Julia
 -- Table structure for table `toolCategory`
 CREATE TABLE `toolCategory` (
-  `categoryID` int PRIMARY KEY,
+  `categoryID` int AUTO_INCREMENT PRIMARY KEY,
   `categoryName` varchar(100) NOT NULL
   `categoryDesc` TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -42,7 +42,7 @@ CREATE TABLE `toolCategory` (
 -- updated by Julia
 -- Table structure for table `tool`
 CREATE TABLE `tool` (
-  `toolID` int PRIMARY KEY,
+  `toolID` int AUTO_INCREMENT PRIMARY KEY,
   `toolName` varchar(100) NOT NULL,
   `toolDesc` varchar(225) NOT NULL,
   `toolImg` varchar(225) NOT NULL,
