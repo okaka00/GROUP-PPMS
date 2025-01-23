@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['id'])) {
 
     if (mysqli_stmt_execute($stmt)) {
         echo "User Id $userID deleted successfully!";
-        echo "<br><a href='" . ADMIN_BASE_URL . "'>Back to Admin Panel</a>";
     } else {
         echo "Error deleting record: " . mysqli_error($conn);
     }
@@ -22,4 +21,5 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['id'])) {
 }
 
 mysqli_close($conn);
+header("Location:userList.php");
 ?>
