@@ -5,7 +5,8 @@
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                  <a href="<?php echo ADMIN_BASE_URL; ?>/modules/user/userlist.php">Manage User</a>
+            <a href="<?php echo ADMIN_BASE_URL; ?>/modules/user/userForm.php">Insert User</a>
+                  <a href="<?php echo ADMIN_BASE_URL; ?>/modules/user/userList.php">Manage User</a>     
             </div>
           
             <!-- Campsite -->
@@ -64,5 +65,14 @@
           </button>
           <div class="dropdown-container">
             <a href="<?php echo ADMIN_BASE_URL; ?>/modules/review/reviewList.php">Manage Guidebook</a>
+          </div>
+          <!-- About Members -->
+          <!-- MOHAMAD DENISH JUMAD BIN JAMIL (BI22110263) -->
+          <button class="dropdown-btn">About Members
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/aboutMembers/aboutMembersForm.php">Create Members</a>
+                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/aboutMembers/aboutMembersList.php">Manage Members</a>
           </div>
         </div>
