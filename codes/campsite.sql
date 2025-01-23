@@ -119,3 +119,13 @@ CREATE TABLE `guidebook` (
 ALTER TABLE guidebook
 ADD COLUMN guidebookImg VARCHAR(255) NULL;
 
+-- Updated by Denish
+-- Table structure for table `aboutMembers`
+CREATE TABLE `aboutMembers` (
+  `memberID` int AUTO_INCREMENT PRIMARY KEY,
+  `userID` int NOT NULL,
+  `memberName` varchar(100) NOT NULL,
+  `memberDesc` TEXT NOT NULL,
+  `memberImg` varchar(255) NOT NULL,
+  FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
