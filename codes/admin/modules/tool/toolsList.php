@@ -9,7 +9,6 @@ include("../../config/config.php");
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" type="text/css" href="../../css/admin.css">
     <title>Tools List</title>
     <style>
@@ -80,13 +79,14 @@ include("../../config/config.php");
 </head>
 
 <body>
-    <!-- Top navigation bar with a logo -->
-    <div class="topNav">
-        <img src="../../img/icon.png" alt="Logo">
-    </div>
 
-    <!-- Include the side navigation bar -->
-    <?php include '../../includes/sideNav.php'; ?>
+    <?php
+        include '../../includes/sideNav.php';
+    ?>
+    
+    <?php
+        include '../../includes/topNav.php';
+    ?>
 
     <!-- Main content area -->
     <div class="main">
