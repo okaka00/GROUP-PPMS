@@ -102,6 +102,9 @@ CREATE TABLE `blog` (
 ALTER TABLE `blog`
   ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`createdBy`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ ALTER TABLE `blog`
+ADD COLUMN `blogTitle` VARCHAR(255) NOT NULL AFTER `blogID`;
+
 -- Table structure for table `guidebook`
 CREATE TABLE `guidebook` (
   `guidebookID` int PRIMARY KEY,
