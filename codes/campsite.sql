@@ -77,16 +77,16 @@ CREATE TABLE `memories` (
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--Updated by Denish kewl
 -- Table structure for table `review`
 CREATE TABLE `review` (
   `reviewID` int PRIMARY KEY,
   `userID` int NOT NULL,
   `rating` int,
-  `rentalID` int NOT NULL,
   `comment` text,
+  `reviewImg` varchar(225),
   `reviewDate` date NOT NULL,
-  FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
-  FOREIGN KEY (`rentalID`) REFERENCES `rental` (`rentalID`)
+  FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Updated by Diana
