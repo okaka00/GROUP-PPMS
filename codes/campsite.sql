@@ -68,16 +68,17 @@ CREATE TABLE `rental` (
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- Updated by Julia
 -- Table structure for table `memories`
 CREATE TABLE `memories` (
-  `memoriesID` int PRIMARY KEY,
+  `memoriesID` int AUTO_INCREMENT PRIMARY KEY,
   `userID` int NOT NULL,
   `memoryImg` varchar(225) NOT NULL,
   `memoryDate` date NOT NULL,
   FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---Updated by Denish kewl
+-- Updated by Denish kewl
 -- Table structure for table `review`
 CREATE TABLE `review` (
   `reviewID` int PRIMARY KEY,
