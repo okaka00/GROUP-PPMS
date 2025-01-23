@@ -1,9 +1,12 @@
 <?php
 //include db config
 include("../../config/config.php");
-
-
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,51 +19,49 @@ include("../../config/config.php");
 </head>
 
 <body>
-    <div class="topNav">
-        <img src="../../img/icon.png" alt="Logo">
+        <?php
+            include '../../includes/sideNav.php'; 
+        ?>
+        
+        <?php
+            include '../../includes/topNav.php'; 
+        ?>
 
-    </div>
-
-    <?php
-    include '../../includes/sideNav.php';
-    ?>
 
     <div class="main">
         <h2 style="text-align: center;">User List</h2>
         <div class="rowform">
+            <table cellpadding='5' cellspacing='0' width='100%'>";
+            <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+            </tr>
+
             <?php
-            $sql_user = "SELECT userID, userName, userPwd, userEmail, regDate, userRoles
-            FROM user 
-            ORDER BY userID ASC";
+            $sql_user = "SELECT u.userID, u.userName, u.userPassword, u.userEmail, r.roleName AS userRole
+            FROM user u
+            INNER JOIN userRole r
+            ON u.roleID = r.roleID
+            ORDER BY u.userID ASC";
             $result = mysqli_query($conn, $sql_user);
             $rowcount = mysqli_num_rows($result);
-
             if ($rowcount > 0) {
-                // Start the table
-                echo "<table border='1' cellpadding='5' cellspacing='0' width='100%'>";
-                echo "<tr>";
-                echo "<th>UserID</th>";
-                echo "<th>User Name</th>";
-                echo "<th>User Email</th>";
-                echo "<th>Register Date</th>";
-                echo "<th>Role</th>";
-                echo "<th>Actions</th>";
-                echo "</tr>";
-
                 // Dynamically create html table row based on output data of each row from customer table
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>" . htmlspecialchars($row["userID"]) . "</td>";
                     echo "<td>" . htmlspecialchars($row["userName"]) . "</td>";
                     echo "<td>" . htmlspecialchars($row["userEmail"]) . "</td>";
-                    echo "<td>" . htmlspecialchars($row["regDate"]) . "</td>";
-                    echo "<td>" . htmlspecialchars($row["userRoles"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["userRole"]) . "</td>";
                     echo "<td>";
+                    echo "<a href='editUser.php?id=" . urlencode($row["userID"]) . "'>Edit</a> | ";
                     echo "<a href='deleteUser.php?id=" . urlencode($row["userID"]) . "' onclick='return confirm(\"Are you sure you want to delete this product?\");'>Delete</a>";
                     echo "</td>";
                     echo "</tr>";
                 }
-
                 echo "</table>";
 
                 // Display row and field counts
@@ -69,11 +70,14 @@ include("../../config/config.php");
                 echo "<p>No results found.</p>";
             }
 
-            echo '</div>';
-            echo '</div>';
             // Free result set
             mysqli_free_result($result);
             //close connection
             mysqli_close($conn);
             ?>
-            <p><a href="<?php echo ADMIN_BASE_URL; ?>">Admin Page</a></p>
+        </div>
+    </div>
+    <script src="../../includes/adminAuth.js"></script>
+
+    </body>
+</html>
