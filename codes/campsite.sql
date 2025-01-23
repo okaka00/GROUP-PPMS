@@ -107,7 +107,7 @@ ADD COLUMN `blogTitle` VARCHAR(255) NOT NULL AFTER `blogID`;
 
 -- Table structure for table `guidebook`
 CREATE TABLE guidebook (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    guidebookID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     guidebookURL VARCHAR(255) NOT NULL,
     guideDesc TEXT,
     userID INT NOT NULL,
