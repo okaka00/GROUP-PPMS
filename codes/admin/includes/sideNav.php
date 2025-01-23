@@ -21,13 +21,16 @@
                   <a href="<?php echo ADMIN_BASE_URL; ?>/modules/campsite/campsiteList.php">Manage Campsite</a>
             </div>
           
+            <!-- Camp Tool -->
+            <!-- JULIA NATASHA BINTI JEMUIN (BI22110410) -->
             <button class="dropdown-btn">Camp Tool
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-              <a href="<?php echo ADMIN_BASE_URL; ?>/modules/product/productForm.php">Create Category</a>
-              <a href="<?php echo ADMIN_BASE_URL; ?>/modules/product/productList.php">Create Tool</a>
-              <a href="<?php echo ADMIN_BASE_URL; ?>/modules/product/orderList.php">Manage Tool</a>
+                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/category/categoryForm.php">Create Category</a>
+                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/category/categoryList.php">Manage Category</a>
+                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/campTool/toolsForm.php">Create Tool</a>
+                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/campTool/toolsList.php">Manage Tool</a>
             </div>
           
             <!-- Rental -->
@@ -55,6 +58,15 @@
             <a href="<?php echo ADMIN_BASE_URL; ?>/modules/blog/blogForm.php">Create Blog</a>
             <a href="<?php echo ADMIN_BASE_URL; ?>/modules/blog/blogList.php">Manage Blog</a>
           </div>
+
+           <!-- Memories -->
+           <!-- JULIA NATASHA BINTI JEMUIN (BI22110410) -->
+            <button class="dropdown-btn">Memories
+            <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="<?php echo ADMIN_BASE_URL; ?>/modules/memories/memoriesList.php">Manage Memories</a>
+            </div>
 
            <!-- Guidebook -->
           <!-- NURULDIANA BINTI ZAIDI (BI22110211) -->
