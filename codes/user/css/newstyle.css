@@ -111,15 +111,18 @@ table {
 }
 
 .col-left {
+  flex:70%;
   text-align: center; /* Centers content horizontally */
   padding: 15px; /* Adds padding for spacing */
 }
 
 .col-right {
-  flex: 2; /* Allows the column to grow twice as large */
+  flex: 30%; /* Allows the column to grow twice as large */
   padding: 15px; /* Adds padding for spacing */
 }
 
+/* ================================*/
+/* Sticky Footer styling  24/1/2025*/ 
 footer {
   background-color: #C2AC7D;
   color: black;
@@ -129,6 +132,7 @@ footer {
   margin-top: 0; 
   margin-bottom: 0;  
 }
+
 
 
 /* Media Queries */
@@ -163,12 +167,29 @@ footer {
   z-index: 1;
 }
 
+.fpwd-popup{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+
+}
+
 .login-popup {
   width: 300px;
   padding: 15px;
 }
 
 .reg-popup {
+  width: 400px;
+  padding: 20px;
+}
+
+.fpwd-popup{
   width: 400px;
   padding: 20px;
 }
@@ -200,10 +221,7 @@ footer {
 
 .login-popup input[type = text],
 .login-popup input[type = password],
-.login-popup input[type = email],
-.reg-popup input [type = text],
-.reg-popup input [type = password],
-.reg-popup input [type = email]
+.login-popup input[type = email]
 {
   width: 100%;
   padding: 12px 20px;
@@ -211,6 +229,29 @@ footer {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+}
+
+.test
+{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.fpwd-popup input [type = text],
+.fpwd-popup input [type = password],
+.fpwd-popup input [type = email]
+{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+
 }
 
 .submit-btn {
@@ -344,7 +385,6 @@ button:hover {
   background-color: #ddd;
   color: black;
 }
-
 
 /*Nadea Update*/
 /*Diana update*/
