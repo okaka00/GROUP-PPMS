@@ -10,7 +10,7 @@
 				<button type="submit" class="submit-btn" >LOGIN</button>
 				<button type="reset" class="reset-btn" value="Reset">RESET</button>
 			</form>
-			<p><a href="javascript:void(0);" onclick="openRegPopup();">| Registration </a> | Forgot Password |</p>
+			<p><a href="javascript:void(0);" onclick="openRegPopup();">| Registration </a><a href="javascript:void(0);" onclick="openFpwdPopup();">| Forgot Password? | </a></p>
 		</div>
 		<!-- Overlay -->
 		<div id="overlay" class="overlay" onclick="closeLoginPopup();"></div>
