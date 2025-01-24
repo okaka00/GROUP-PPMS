@@ -1,6 +1,7 @@
 <!-- AFIQAH BINTI AHMAD FAIRUZE (BI22110327) -->
 
 <?php
+    session_start();
     include("../../config/config.php");
 
     // Retrieve the zone ID from the GET request. If not provided, redirect to the zone list page.
@@ -142,12 +143,10 @@
     </style>
 </head>
 <body>
-    <!-- Top Navigation Bar -->
-    <div class="topNav">
-        <img src="<?php echo ADMIN_BASE_URL; ?>/img/icon.png" alt="Logo">
-    </div>
+    <!-- Top Navigation -->
+    <?php include '../../includes/topNav.php'; ?>
 
-    <!-- Side Navigation Bar -->
+    <!-- Side Navigation -->
     <?php include '../../includes/sideNav.php'; ?>
 
     <div class="main">
@@ -170,5 +169,7 @@
             </form>
         </div>
     </div>
+    <!-- Dropdown Content JS -->
+    <script src="../../includes/adminAuth.js"></script>
 </body>
 </html>
