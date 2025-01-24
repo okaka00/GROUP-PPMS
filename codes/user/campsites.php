@@ -3,6 +3,11 @@
 session_start();
 include("config/config.php");
 
+// Initialize cart session if not set
+if (!isset($_SESSION['cart_item'])) {
+    $_SESSION['cart_item'] = [];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
