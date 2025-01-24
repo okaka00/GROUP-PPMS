@@ -4,9 +4,9 @@
 			<h3>User Login </h3>
 			<form action="userAuth/login_action.php" method="post">
 				<label for="userEmail">User Email:</label><br>
-				<input type="email" id="userEmail" name="userEmail" required><br><br>
+				<input type="email" class="test" id="userEmail" name="userEmail" required><br><br>
 				<label for="userPassword">Password:</label><br>
-				<input type="password" id="userPassword" name="userPassword" required maxlength="8" autocomplete="off"><br><br>
+				<input type="password" class="test" id="userPassword" name="userPassword" required maxlength="8" autocomplete="off"><br><br>
 				<button type="submit" class="submit-btn" >LOGIN</button>
 				<button type="reset" class="reset-btn" value="Reset">RESET</button>
 			</form>
