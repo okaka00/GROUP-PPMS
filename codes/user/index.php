@@ -121,6 +121,26 @@ include("config/config.php");
 
 	}
 
+	#image{
+		width: 300px;
+        margin: auto;
+        border-radius: 8px;
+	}
+
+	.imgBox{
+		margin: auto;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
+
+	}
+
+	.mapBox{
+		width: auto; 
+		height: 600px; 
+		margin: auto;
+	}
+
 
 	@media screen and (max-width: 980px) {
 		
@@ -152,6 +172,12 @@ include("config/config.php");
 		include("userAuth/register.php");
 		?>
 
+		<!-- Forgot Password Popup -->
+		<?php
+		include("userAuth/forgotPwd.php");
+		?>
+
+
 		<!-- Place banner under menu for bigger space -->
 		<img class="image" src="img/banner.png">
 	
@@ -161,7 +187,7 @@ include("config/config.php");
 			<div class="intro-content">
 				<h2>Our Offerings</h2>
 				<p>Mamahillcamp offers the perfect escape for outdoor enthusiasts and relaxation seekers. 
-				With a beautiful riverside view and facilities to host ,
+				With a beautiful city and Mount.K view and facilities to host ,
 				 we ensure an unforgettable camping experience.</p>
 			</div>
 		</section>
@@ -172,7 +198,7 @@ include("config/config.php");
 				<div class="highlight-item">
 					<h3>Our Signature</h3>
 					<a href="campsites.php"><img src="img/index5.png" alt="camping" class="highlight-image"></a>
-					<p>Campsite & Chalet</p>
+					<p>Campsite </p>
 				</div>
 
 				<div class="highlight-item">
@@ -190,7 +216,7 @@ include("config/config.php");
 		</section>
 		
 		<!-- location Section -->
-		<section class="galery-header">
+		<section class="main-introduction">
 		<div class="intro-content">
 				<h2>Our Location</h2>
 		</div>
@@ -198,8 +224,23 @@ include("config/config.php");
 
 		<section class="highlights">
 		<div class="row">
+		<div class="col-right">
+				<div class="Location-box">
+					<h2>Find Us Here At Kokol Hill</h2>
+					<p> Mamahillcamp is located at Kokol Hill, 
+						just a 30-minute drive from Kota Kinabalu city. 
+						Enjoy breathtaking views, fresh mountain air, 
+						and a peaceful escape in nature.
+					</p>
+				</div>
+				<div class="imgBox">
+
+					<img id="image"src="img/index7.gif">
+				</div>
+			</div>
+
 			<div class="col-left">
-					<div style="width: 800px; height: 600px; margin: auto;">
+					<div class="mapBox">
 						<iframe 
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.863409287196!2d116.20435933898426!3d6.013485428905886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x323b6d1a9ccd4cf9%3A0x128a167f42a6e048!2sKokol%20MamaHill%20Campsite!5e0!3m2!1sen!2smy!4v1737578865854!5m2!1sen!2smy"
 							width="100%" 
@@ -209,18 +250,7 @@ include("config/config.php");
 							loading="lazy">
 						</iframe>
 					</div>
-			</div>
-			<div class="col-right">
-				<div class="Location-box">
-					<h2>Find Us Here At Kokol Hill</h2>
-					<p> Mamahillcamp is located at Kokol Hill, 
-						just a 30-minute drive from Kota Kinabalu city. 
-						Enjoy breathtaking views, fresh mountain air, 
-						and a peaceful escape in nature.
-					</p>
-				</div>
-			</div>
-				
+			</div>				
 		</div>
 		</section>
 		
