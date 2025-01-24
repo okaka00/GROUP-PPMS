@@ -2,169 +2,238 @@
 session_start();
 include("config/config.php");
 
-if (!empty($_GET["action"])) {
-	switch ($_GET["action"]) {
-		case "add":
-			if (!empty($_POST["quantity"])) {
-				$productID = $_GET["id"];
-
-				$sql = "SELECT * FROM product WHERE productID = '$productID'";
-				$result = mysqli_query($conn, $sql);
-				$row = mysqli_fetch_assoc($result);
-				$pid = "pid" . $row["productID"];
-
-				$itemArray = array(
-					$pid => array('name' => $row["productName"], 'img' => $row["productImg"], 'prodID' => $row["productID"], 'quantity' => $_POST["quantity"], 'price' => $row["productPrice"])
-				);
-
-				if (!empty($_SESSION["cart_item"])) {
-					if (in_array($pid, array_keys($_SESSION["cart_item"]))) {
-						foreach ($_SESSION["cart_item"] as $k => $v) {
-							if ($pid == $k) {
-								if (empty($_SESSION["cart_item"][$k]["quantity"])) {
-									$_SESSION["cart_item"][$k]["quantity"] = 0;
-								}
-							}
-						}
-					} else {
-						$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"], $itemArray);
-					}
-				} else {
-					$_SESSION["cart_item"] = $itemArray;
-				}
-			}
-			break;
-		case "remove":
-			if (!empty($_SESSION["cart_item"])) {
-				foreach ($_SESSION["cart_item"] as $k => $v) {
-					if ("pid" . $_GET["prodID"] == $k)
-						unset($_SESSION["cart_item"][$k]);
-					if (empty($_SESSION["cart_item"]))
-						unset($_SESSION["cart_item"]);
-				}
-			}
-			break;
-		case "empty":
-			unset($_SESSION["cart_item"]);
-			break;
-	}
+// Initialize cart session if not set
+if (!isset($_SESSION['cart_item'])) {
+    $_SESSION['cart_item'] = [];
 }
+
+// Handle add action
+if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
+
+    // Fetch item details from the database
+    // Check if the item is a campsite or a tool
+    if (isset($_GET['type']) && $_GET['type'] == 'campsite') {
+        $sql = "SELECT * FROM campsite WHERE campsiteID = $id";
+    } else {
+        $sql = "SELECT * FROM tool WHERE toolID = $id";
+    }
+    
+    $result = mysqli_query($conn, $sql);
+    $item = mysqli_fetch_assoc($result);
+
+    if ($item) {
+        // Check if item already exists in cart
+        if (isset($_SESSION['cart_item'][$item['campsiteID'] ?? $item['toolID']])) {
+            $_SESSION['cart_item'][$item['campsiteID'] ?? $item['toolID']]["quantity"] += $quantity; // Update quantity
+        } else {
+            $_SESSION['cart_item'][$item['campsiteID'] ?? $item['toolID']] = [
+                "name" => $item['campsiteName'] ?? $item['toolName'],
+                "id" => $item['campsiteID'] ?? $item['toolID'],
+                "quantity" => $quantity,
+                "price" => $item['campsitePrice'] ?? $item['pricePerDay']
+            ];
+        }
+    }
+
+    header("Location: campsite.php"); // Redirect back to campsite page
+    exit();
+}
+
+// Handle remove action
+if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id'])) {
+    $id_to_remove = $_GET['id'];
+
+    // Loop through cart items to find the one to remove
+    foreach ($_SESSION['cart_item'] as $key => $item) {
+        if ($item['id'] == $id_to_remove) {
+            unset($_SESSION['cart_item'][$key]);
+            break; // Stop after removing the item
+        }
+    }
+}
+
+$total_quantity = 0;
+$total_price = 0;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>My Product Portfolio Page</title>
-	<meta charset="utf-8">
+<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/newstyle.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* CSS from previous example */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        .actions a, .checkout-btn {
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .actions a {
+            color: #f44336;
+            border: 1px solid #f44336;
+            background: transparent;
+        }
+
+        .actions a:hover {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        .checkout-btn {
+            display: inline-block;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            text-align: center;
+        }
+
+        .checkout-btn:hover {
+            background-color: #45a049;
+        }
+
+        .summary {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .summary span {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            table th, table td {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+
+            .checkout-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-	<header>
-		<!-- <h1>Home</h1> 	
-		<img class="image" src="img/coffeeblog.png"> -->
-	</header>
 	<!-- User Nav section-->
 	<?php
 	include("includes/userNav.php");
 	?>
+	<!-- Navigation Menu -->
+	<?php
+	include("includes/topNav.php");
+	?>
+
+	<!-- Place banner under menu for bigger space -->
+	<img class="image" src="img/banner.png">
+	
 	<!-- Main container for sticky footer -->
 	<div class="container">
-		<!-- Navigation Menu -->
-		<?php
-		include("includes/topNav.php");
-		?>
+        <h1>Your Shopping Cart</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Item Name</th>
+                    <th>Item ID</th>
+                    <th>Quantity</th>
+                    <th>Unit Price (RM)</th>
+                    <th>Total Price (RM)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($_SESSION['cart_item'])): ?>
+                    <?php foreach ($_SESSION['cart_item'] as $item): ?>
+                        <?php
+                        $item_total = $item["quantity"] * $item["price"];
+                        $total_quantity += $item["quantity"];
+                        $total_price += $item_total;
+                        ?>
+                        <tr>
+                            <td><?php echo $item["category"]; ?></td>
+                            <td><?php echo $item["name"]; ?></td>
+                            <td><?php echo $item["id"]; ?></td>
+                            <td><?php echo $item["quantity"]; ?></td>
+                            <td><?php echo number_format($item["price"], 2); ?></td>
+                            <td><?php echo number_format($item_total, 2); ?></td>
+                            <td class="actions"><a href="cart_action.php?action=remove&id=<?php echo $item['id']; ?>">Remove</a></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="7" style="text-align: center;">Your cart is empty!</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
 
-		<div class="section">			
-			<?php
-			if (isset($_SESSION["cart_item"])) {
-				$total_quantity = 0;
-				$total_price = 0;
-			?>
-				<table cellpadding="10" cellspacing="1" id="blogtable" width="100%" style="margin: 0 10px 0 10px;max-width: 900px;">
-					<tbody>
-						<tr>
-							<th style="background-color: #e0e0e0;text-align: center;">Product</th>
-							<th style="background-color: #e0e0e0;text-align: center;">Product ID</th>
-							<th style="background-color: #e0e0e0;text-align: center;">Quantity</th>
-							<th style="background-color: #e0e0e0;text-align: center;">Unit Price (RM)</th>
-							<th style="background-color: #e0e0e0;text-align: center;">Price (RM)</th>
-							<th style="background-color: #e0e0e0;text-align: center;">Actions</th>
-						</tr>
-
-						<?php
-						foreach ($_SESSION["cart_item"] as $item) {
-							$item_price = $item["quantity"] * $item["price"];
-						?>
-							<tr>
-								<td style="text-align:left;"><?php echo $item["name"]; ?></td>
-								<td style="text-align:center;"><?php echo $item["prodID"]; ?></td>
-								<td style="text-align:center;"><?php echo $item["quantity"]; ?></td>
-								<td style="text-align:center;"><?php echo $item["price"]; ?></td>
-								<td style="text-align:center;"><?php echo number_format($item_price, 2); ?></td>
-								<td style="text-align:center;"><a href="cart_action.php?action=remove&prodID=<?php echo $item["prodID"]; ?>"><i class="fa fa-times-circle"></i> Remove</a></td>
-							</tr>
-						<?php
-							$total_quantity += $item["quantity"];
-							$total_price += ($item["price"] * $item["quantity"]);
-						}
-						?>
-
-						<tr>
-							<td colspan="2" align="right"><b>Total:</b></td>
-							<td style="text-align:center;"><?php echo $total_quantity; ?></td>
-							<td style="text-align:center;" colspan="2"><strong><?php echo "RM " . number_format($total_price, 2); ?></strong></td>
-							<form method="post" action="checkout.php?price=<?php echo $total_price; ?>">
-								<input type="hidden" name="tot_price" value="<?php echo $total_price; ?>">
-								<td style="text-align:center;"><button type="submit">Checkout</button></td>
-							</form>
-						</tr>
-					</tbody>
-				</table>
-
-				<p style="margin: 15px;"><a href="cart_action.php?action=empty"><i class="fa fa-trash" style="font-size:24px"></i> Empty Cart</a></p>
-				<p style="margin: 15px;"><a href="portfolio.php"><i class="fa fa-cart" style="font-size:24px"></i> Continue Shopping</a></p>
-			<?php
-			} else {
-			?>
-				<p style="margin: 15px;">Your Cart is Empty</p>
-			<?php
-			}
-			?>
-		</div>
-	</div>
-		<p></p>
-		<footer class="footer">
-			<p><small><i>Copyright &copy; 2024 FCI</i></small></p>
-		</footer>
-
-		<script>
-			document.addEventListener("DOMContentLoaded", function() {
-				const navLinks = document.querySelectorAll(".topnav a");
-				const currentPath = window.location.pathname;
-
-				navLinks.forEach(link => {
-					if (link.href.includes(currentPath)) {
-						link.classList.add("active");
-					} else {
-						link.classList.remove("active");
-					}
-				});
-			});
-
-			function myFunction() {
-				var x = document.getElementById("myTopnav");
-				if (x.className === "topnav") {
-					x.className += " responsive";
-				} else {
-					x.className = "topnav";
-				}
-			}
-		</script>
-
+        <div class="summary">
+            <p>Total Items: <span><?php echo $total_quantity; ?></span></p>
+            <p>Total Price: <span>RM <?php echo number_format($total_price, 2); ?></span></p>
+            <a href="checkout.php" class="checkout-btn">Checkout</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>Copyright &copy; 2025 Mamahill Camp. All rights reserved.</p>
+    </footer>
 </body>
-
 </html>
