@@ -1,6 +1,7 @@
 <!-- AFIQAH BINTI AHMAD FAIRUZE (BI22110327) -->
 
 <?php
+    session_start();
     include("../../config/config.php");
 ?>
 <!DOCTYPE html>
@@ -66,17 +67,15 @@
     </style>
 </head>
 <body>
-    <!-- Top Navigation Bar -->
-    <div class="topNav">
-        <img src="<?php echo ADMIN_BASE_URL; ?>/img/icon.png" alt="Logo">
-    </div>
+    <!-- Top Navigation -->
+    <?php include '../../includes/topNav.php'; ?>
 
-    <!-- Side Navigation Bar -->
+    <!-- Side Navigation -->
     <?php include '../../includes/sideNav.php'; ?>
 
     <!-- Main content area -->
     <div class="main">
-        <h2 style="text-align: center;">Add New Zone Form</h2>
+        <h2 style="text-align: center;">Create Zone</h2>
         <div class="rowform">
             <!-- Form to insert a new zone -->
             <form action="zoneInsert.php" method="POST" enctype="multipart/form-data">
@@ -94,6 +93,7 @@
             </form>
         </div>
     </div>
+    <!-- Dropdown Content JS -->
+    <script src="../../includes/adminAuth.js"></script>
 </body>
 </html>
-
