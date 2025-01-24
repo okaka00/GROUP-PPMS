@@ -37,7 +37,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
         }
     }
 
-    header("Location: cart_action.php"); // Redirect back to campsite page
+    header("Location: campsite.php"); // Redirect back to campsite page
     exit();
 }
 
@@ -189,7 +189,6 @@ $total_price = 0;
         <table>
             <thead>
                 <tr>
-                    <th>Category</th>
                     <th>Item Name</th>
                     <th>Item ID</th>
                     <th>Quantity</th>
@@ -207,7 +206,6 @@ $total_price = 0;
                         $total_price += $item_total;
                         ?>
                         <tr>
-                            <td><?php echo $item["category"]; ?></td>
                             <td><?php echo $item["name"]; ?></td>
                             <td><?php echo $item["id"]; ?></td>
                             <td><?php echo $item["quantity"]; ?></td>
