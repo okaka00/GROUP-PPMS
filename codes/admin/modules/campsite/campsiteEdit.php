@@ -1,6 +1,7 @@
 <!-- AFIQAH BINTI AHMAD FAIRUZE (BI22110327) -->
 
 <?php
+    session_start();
     include("../../config/config.php");
 
     // Retrieve the campsiteID from the GET request or set it to null if not provided
@@ -122,17 +123,15 @@
     </style>
 </head>
 <body>
-    <div class="topNav">
-        <!-- Navigation bar with logo -->
-        <img src="<?php echo ADMIN_BASE_URL; ?>/img/icon.png" alt="Logo">
-    </div>
+    <!-- Top Navigation -->
+    <?php include '../../includes/topNav.php'; ?>
 
-    <!-- Include the sidebar navigation -->
+    <!-- Side Navigation -->
     <?php include '../../includes/sideNav.php'; ?>
 
     <!-- Main content area -->
     <div class="main">
-        <h2 style="text-align: center;">Edit Campsite ID: <?= htmlspecialchars($campsiteID) ?></h2>
+        <h2 style="text-align: center;">Update Campsite ID: <?= htmlspecialchars($campsiteID) ?></h2>
         <div class="rowform">
             <!-- Form for updating campsite details -->
             <form action="" method="POST">
@@ -150,5 +149,7 @@
             </form>
         </div>
     </div>
+    <!-- Dropdown Content JS -->
+    <script src="../../includes/adminAuth.js"></script>
 </body>
 </html>
