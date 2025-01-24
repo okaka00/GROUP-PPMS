@@ -1,147 +1,165 @@
 <?php
-// Include database configuration
-$config_path = "config/config.php";
-if (!file_exists($config_path)) {
-    die("Error: Configuration file not found.");
-}
-include($config_path);
+// Include db config
+session_start();
+include("config/config.php");
 
-// Ensure database connection is established
-if (!$conn) {
-    die("Error: Database connection failed.");
-}
-
-// Fetch guidebooks from the database
-$sql = "SELECT g.guidebookID, g.guidebookURL, g.guideDesc, g.guidebookImg, g.createdDate, u.userName
-        FROM guidebook g
-        JOIN user u ON g.userID = u.userID
-        ORDER BY g.createdDate DESC";
-
-$result = mysqli_query($conn, $sql);
-if (!$result) {
-    die("Error: Query failed - " . mysqli_error($conn));
-}
+// Fetch guidebook entries from the database
+$sql_guidebook = "SELECT * FROM guidebook ORDER BY guidebookID DESC";
+$result = mysqli_query($conn, $sql_guidebook);
 $rowcount = mysqli_num_rows($result);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <title>Guidebooks</title>
-    <style>
-        body {
-            font-family: 'Raleway', sans-serif;
-            margin: 0;
-            background-color: #F6F2F1;
-            color: #08332C;
-        }
-        .topNav {
-            background-color: #08332C;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-        }
-        .topNav img {
-            height: 40px;
-        }
-        .main {
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #FFFFFF;
-            border-radius: 8px;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
-        }
-        .main h2 {
-            text-align: center;
-            color: #08332C;
-        }
-        .guidebook-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .guidebook-item {
-            background-color: #F6F2F1;
-            border: 1px solid #C2AC7D;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
-        }
-        .guidebook-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-        .guidebook-item h3 {
-            font-size: 18px;
-            margin: 10px 0;
-            color: #08332C;
-        }
-        .guidebook-item p {
-            font-size: 14px;
-            margin: 5px 0;
-            color: #08332C;
-        }
-        .guidebook-item a {
-            text-decoration: none;
-            background-color: #08332C;
-            color: #F6F2F1;
-            padding: 10px 15px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-        .guidebook-item a:hover {
-            background-color: #C2AC7D;
-            color: #08332C;
-        }
-    </style>
-</head>
-<body>
-    <!-- User Navigation -->
-    <?php include("includes/userNav.php"); ?>
 
-    <!-- Main container for sticky footer -->
-    <div class="container">
+<head>
+  <title>Guidebook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/newstyle.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway|Roboto">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /* Guidebook Container */
+    .guidebook-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    /* Guidebook Post */
+    .guidebook-post {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 20px;
+    }
+
+    .guidebook-post:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .guidebook-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .guidebook-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #34495e;
+    }
+
+    .guidebook-meta {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      margin-bottom: 15px;
+    }
+
+    .guidebook-desc {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .view-guide {
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .view-guide:hover {
+      color: #0056b3;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+    .footer small {
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- User Navigation -->
+  <?php include("includes/userNav.php"); ?>
+
+  <!-- Main container for sticky footer -->
+  <div class="container">
     <?php
-         include("includes/topNav.php");
+    include("includes/topNav.php");
+    include("userAuth/modalForm.php");
     ?>
 
-    <div class="main">
-        <h2>Available Guidebooks</h2>
-        <div class="guidebook-list">
-            <?php
-            if ($rowcount > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<div class='guidebook-item'>";
-                    if ($row["guidebookImg"]) {
-                        echo "<img src='" . htmlspecialchars($row["guidebookImg"]) . "' alt='Guidebook: " . htmlspecialchars($row["guidebookURL"]) . "'>";
-                    }
-                    echo "<h3>" . htmlspecialchars($row["guidebookURL"]) . "</h3>";
-                    echo "<p>" . htmlspecialchars($row["guideDesc"]) . "</p>";
-                    echo "<p><strong>Created by:</strong> " . htmlspecialchars($row["userName"]) . "</p>";
-                    echo "<p><strong>Created on:</strong> " . htmlspecialchars($row["createdDate"]) . "</p>";
-                    echo "<a href='" . htmlspecialchars($row["guidebookURL"]) . "' target='_blank' download>Download Guidebook</a>";
-                    echo "</div>";
-                }
-            } else {
-                echo "<p>No guidebooks available at the moment.</p>";
+    <main>
+      <h2>Our Guidebooks</h2>
+      <div class="guidebook-container">
+        <?php
+        if ($rowcount > 0) {
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class="guidebook-post">';
+            if (!empty($row['guidebookImg'])) {
+              echo '<img src="' . htmlspecialchars($row['guidebookImg']) . '" alt="Guidebook Image" class="guidebook-img">';
             }
-            ?>
-        </div>
-    </div>
-</body>
-</html>
+            echo '<h3 class="guidebook-title">Guidebook #' . htmlspecialchars($row['guidebookID']) . '</h3>';
+            echo '<p class="guidebook-meta">Posted by User ID: ' . htmlspecialchars($row['userID']) . ' | Updated on ' . date("d/m/Y", strtotime($row['updatedDate'])) . '</p>';
+            echo '<p class="guidebook-desc">' . nl2br(htmlspecialchars($row['guideDesc'])) . '</p>';
+            if (!empty($row['guidebookURL'])) {
+              echo '<a href="' . htmlspecialchars($row['guidebookURL']) . '" target="_blank" class="view-guide">View Guidebook</a>';
+            }
+            echo '</div>';
+          }
+        } else {
+          echo '<p>No guidebooks available at the moment.</p>';
+        }
+        ?>
+      </div>
+    </main>
+  </div>
 
-<?php
-// Close the database connection
-mysqli_close($conn);
-?>
+  <footer class="footer">
+    <p><small><i>Copyright &copy; 2024 FCI</i></small></p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const navLinks = document.querySelectorAll(".topnav a");
+      const currentPath = window.location.pathname;
+
+      navLinks.forEach(link => {
+        if (link.href.includes(currentPath)) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    });
+
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+  </script>
+</body>
+
+</html>
