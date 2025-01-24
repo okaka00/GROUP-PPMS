@@ -1,9 +1,9 @@
 <nav class="topnav" id="myTopnav">
 
     <a href="index.php">Home</a>
-    <a href="memories.php">Photo Album</a>
-    <a href="promotions_events.php">Promotions & Events</a>
+    <a href="memories.php">Memories</a>
     <a href="campsites.php">Campsites</a>
+    <a href="About_Our_Member.php">Our Member</a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i></a>
         
