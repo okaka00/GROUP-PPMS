@@ -7,9 +7,9 @@
 				<label for="userEmail">User Email:</label><br>
 				<input type="email" class="test" id="userEmail" name="userEmail" required><br><br>
 				<label for="userPassword">New Password:</label><br>
-				<input type="password" id="userPassword" name="userPassword" required maxlength="8" autocomplete="off"><br><br>
+				<input type="password" class="test" id="userPassword" name="userPassword" required maxlength="8" autocomplete="off"><br><br>
                 <label for="checkNewPwd">Confirm Password:</label><br>
-                <input type="password" placeholder="ReEnter New Password" id="checkNewPwd" name="confirmNewPwd"required>
+                <input type="password"class="test" placeholder="ReEnter New Password" id="checkNewPwd" name="confirmNewPwd"required>
 				<button type="submit" class="submit-btn" >CONFIRM</button>
 				<button type="reset" class="reset-btn" value="Reset">RESET</button>
 			</form>
