@@ -2,19 +2,20 @@
 //include db config
 session_start();
 include("config/config.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Mini Cafe</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/newstyle.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Mini Cafe</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/newstyle.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <style>
+	<style>
     /* Global Styles */
     body {
         font-family: 'Arial', sans-serif;
@@ -94,7 +95,8 @@ include("config/config.php");
     }
 
     .highlight-image {
-        width: 30%;
+        width: 80%;
+        max-width: 300px;
         margin: 20px auto;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -311,18 +313,20 @@ button {
 </style>
 </head>
 
-    <!-- User Nav section-->
-    <?php
-    include("includes/userNav.php");
-    ?>
-    
-    <!-- Main container for sticky footer -->
-    <div class="container">
-        <!-- Navigation Menu -->
-        <?php
-        include("includes/topNav.php");
-        ?>
-    
+	<!-- User Nav section-->
+	<?php
+	include("includes/userNav.php");
+	?>
+	
+	<!-- Main container for sticky footer -->
+	<div class="container">
+		<!-- Navigation Menu -->
+		<?php
+		include("includes/topNav.php");
+		?>
+		<!-- Place banner under menu for bigger space -->
+		<img class="image" src="img/banner.png">
+	
     <!-- Tools Rental Section -->
 <section class="tools-rental">
     <div class="main-introduction">
@@ -346,21 +350,21 @@ button {
                 $toolImg = $row['toolImg'];
                 $toolDesc = htmlspecialchars($row['toolDesc']);
                 $pricePerDay = htmlspecialchars($row['pricePerDay']);
-                ?>
-                        <div class="highlight-item">
-                            <img src="<?= $toolImg ?>" alt="<?= $toolName ?>" class="highlight-image">
-                            <h3><?= $toolName ?></h3>
-                            <p><?= $toolDesc ?></p>
-                            <p>Price: RM <span id="price-<?= $toolId ?>"><?= $pricePerDay ?></span>/day</p>
+        ?>
+                <div class="highlight-item">
+                    <img src="<?= $toolImg ?>" alt="<?= $toolName ?>" class="highlight-image">
+                    <h3><?= $toolName ?></h3>
+                    <p><?= $toolDesc ?></p>
+                    <p>Price: RM <span id="price-<?= $toolId ?>"><?= $pricePerDay ?></span>/day</p>
 
-                            <p>Total Price: RM <span id="total-price-<?= $toolId ?>"><?= $pricePerDay ?></span></p>
+                    <p>Total Price: RM <span id="total-price-<?= $toolId ?>"><?= $pricePerDay ?></span></p>
 
-                            <form method="post" action="cart_action.php?action=add&id=<?= $toolId ?>">
-                                <input type="hidden" id="product-quantity-<?= $toolId ?>" name="quantity" value="1">
-                                <button type="submit">Add to Cart</button>
-                            </form>
-                        </div>
-                <?php
+                    <form method="post" action="cart_action.php?action=add&id=<?= $toolId ?>">
+                        <input type="hidden" id="product-quantity-<?= $toolId ?>" name="quantity" value="1">
+                        <button type="submit" class="booking-button">Add to Cart</button>
+                    </form>
+                </div>
+        <?php
             }
         } else {
             echo '<p>No tools available at the moment.</p>';
@@ -369,16 +373,17 @@ button {
     </div>
 </div>
 
+
 </section>
  <!-- Footer -->
  <footer>
-    <p>Copyright &copy; 2024 Mini Café. All rights reserved.</p>
+    <p>Copyright &copy; 2025 Mamahill Camp. All rights reserved.</p>
   </footer>
   <script>
     function updateQuantity(action, toolId, unitPrice) {
-        const quantitySpan = document.getElementById(quantity-${toolId});
-        const totalPriceSpan = document.getElementById(total-price-${toolId});
-        const quantityInput = document.getElementById(product-quantity-${toolId});
+        const quantitySpan = document.getElementById(`quantity-${toolId}`);
+        const totalPriceSpan = document.getElementById(`total-price-${toolId}`);
+        const quantityInput = document.getElementById(`product-quantity-${toolId}`);
 
         let currentQuantity = parseInt(quantitySpan.textContent);
 
@@ -393,45 +398,45 @@ button {
         quantityInput.value = currentQuantity;
     }
 
-        //menu navigation active, upon page load
-        document.addEventListener("DOMContentLoaded", function() {
-            const navLinks = document.querySelectorAll(".topnav a");
-            const currentPath = window.location.pathname;
+		//menu navigation active, upon page load
+		document.addEventListener("DOMContentLoaded", function() {
+			const navLinks = document.querySelectorAll(".topnav a");
+			const currentPath = window.location.pathname;
 
-            // Remove any existing 'active' class from all links initially
-            navLinks.forEach(link => link.classList.remove("active"));
+			// Remove any existing 'active' class from all links initially
+			navLinks.forEach(link => link.classList.remove("active"));
 
-            // Add 'active' class to the link that matches the current path
-            navLinks.forEach(link => {
-                const linkPath = new URL(link.href).pathname; // Get path part of link's URL
-                if (linkPath === currentPath) {
-                    link.classList.add("active");
-                }
-            });
-        });
+			// Add 'active' class to the link that matches the current path
+			navLinks.forEach(link => {
+				const linkPath = new URL(link.href).pathname; // Get path part of link's URL
+				if (linkPath === currentPath) {
+					link.classList.add("active");
+				}
+			});
+		});
 
-        //Login & Reg Form Popup
-        function openLoginPopup() {
-            document.getElementById("login-popup").style.display = "block";
-            document.getElementById("overlay").style.display = "block";
-        }
+		//Login & Reg Form Popup
+		function openLoginPopup() {
+			document.getElementById("login-popup").style.display = "block";
+			document.getElementById("overlay").style.display = "block";
+		}
 
-        function closeLoginPopup() {
-            document.getElementById("login-popup").style.display = "none";
-            document.getElementById("overlay").style.display = "none";
-        }
+		function closeLoginPopup() {
+			document.getElementById("login-popup").style.display = "none";
+			document.getElementById("overlay").style.display = "none";
+		}
 
-        function openRegPopup() {
-            document.getElementById("reg-popup").style.display = "block";
-            document.getElementById("overlay").style.display = "block";
-        }
+		function openRegPopup() {
+			document.getElementById("reg-popup").style.display = "block";
+			document.getElementById("overlay").style.display = "block";
+		}
 
-        function closeRegPopup() {
-            document.getElementById("reg-popup").style.display = "none";
-            document.getElementById("login-popup").style.display = "none";
-            document.getElementById("overlay").style.display = "none";
-        }
-    </script>
+		function closeRegPopup() {
+			document.getElementById("reg-popup").style.display = "none";
+			document.getElementById("login-popup").style.display = "none";
+			document.getElementById("overlay").style.display = "none";
+		}
+	</script>
 
 </body>
 
