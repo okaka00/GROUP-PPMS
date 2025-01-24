@@ -1,6 +1,7 @@
 <!-- AFIQAH BINTI AHMAD FAIRUZE (BI22110327) -->
 
 <?php
+    session_start();
     include("../../config/config.php");
 
     // Query to fetch zone details (zoneID, zoneDesc, zoneImg) from the database
@@ -79,17 +80,15 @@
     </style>
 </head>
 <body>
-    <!-- Top navigation bar with a logo -->
-    <div class="topNav">
-        <img src="<?php echo ADMIN_BASE_URL; ?>/img/icon.png" alt="Logo">
-    </div>
+    <!-- Top Navigation -->
+    <?php include '../../includes/topNav.php'; ?>
 
-    <!-- Include the side navigation bar -->
+    <!-- Side Navigation -->
     <?php include '../../includes/sideNav.php'; ?>
 
-    <!-- Main content area -->
+    <!-- Main Content -->
     <div class="main">
-        <h2 style="text-align: center;">Add New Campsite Form</h2>
+        <h2 style="text-align: center;">Create Campsite</h2>
         <div class="rowform">
             <!-- Form to add a new campsite -->
             <form action="campsiteInsert.php" method="POST">
@@ -146,6 +145,9 @@
             }
         }
     </script>
+
+    <!-- Dropdown Content JS -->
+    <script src="../../includes/adminAuth.js"></script>
 
     <!-- Close the database connection -->
     <?php mysqli_close($conn); ?>
