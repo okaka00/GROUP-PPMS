@@ -219,18 +219,6 @@ footer {
   border-radius: 5px;
 }
 
-.login-popup input[type = text],
-.login-popup input[type = password],
-.login-popup input[type = email]
-{
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
 .test
 {
   width: 100%;
@@ -239,19 +227,6 @@ footer {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-}
-
-.fpwd-popup input [type = text],
-.fpwd-popup input [type = password],
-.fpwd-popup input [type = email]
-{
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-
 }
 
 .submit-btn {
