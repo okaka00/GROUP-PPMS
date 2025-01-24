@@ -37,7 +37,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
         }
     }
 
-    header("Location: campsite.php"); // Redirect back to campsite page
+    header("Location: cart_action.php"); // Redirect back to campsite page
     exit();
 }
 
