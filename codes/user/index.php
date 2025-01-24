@@ -3,12 +3,13 @@
 //include db config
 session_start();
 include("config/config.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Mini Cafe</title>
+	<title>Kokol Mamahill</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/newstyle.css">
@@ -100,11 +101,23 @@ include("config/config.php");
        
     }
 
-	.galery-header{
+	.Location-header{
 		padding: 10px;
         background: linear-gradient(135deg, #f9f9f9, #e4e6e8);
         text-align: center;
         border-bottom: 2px solid #ddd;
+		height: 40px;
+
+	}
+
+	.Location-box{
+		background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 200 px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
 
 	}
 
@@ -158,56 +171,35 @@ include("config/config.php");
 			<div class="highlight-container">
 				<div class="highlight-item">
 					<h3>Our Signature</h3>
-					<img src="img/index5.png" alt="camping" class="highlight-image">
+					<a href="campsites.php"><img src="img/index5.png" alt="camping" class="highlight-image"></a>
 					<p>Campsite & Chalet</p>
 				</div>
 
 				<div class="highlight-item">
 					<h3>Attraction</h3>
-					<img src="img/index6.png" alt="activity" class="highlight-image">
+					<a href="photo_album.php"> <img src="img/index6.png" alt="activity" class="highlight-image"></a>
 					<p>Explore our main activities!</p>
 				</div>
 
 				<div class="highlight-item">
 					<h3>Event Space</h3>
-					<img src="img/index4.png" alt="Lounge Room" class="highlight-image">
+					<a href="promotions_events.php"> <img src="img/index4.png" alt="Lounge Room" class="highlight-image"> </a>
 					<p>A space for celebration by connecting with the nature.</p>
 				</div>
 			</div>
 		</section>
 		
-		<!-- Galery Section -->
-		 <section class="galery-header">
-		<div class="intro-content">
-				<h2>GALLERY</h2>
-		</div>
-
-		</section>
-		<!-- Galery grid -->
-		<section class="highlights">
-		</section>
-
 		<!-- location Section -->
 		<section class="galery-header">
 		<div class="intro-content">
 				<h2>Our Location</h2>
 		</div>
 		</section>
+
 		<section class="highlights">
 		<div class="row">
-			<div class="col-right">
-				<div class="highlights-item">
-					<h2>Fimd Us Here At Kokol Hill</h2>
-					<p> Mamahillcamp is located at Kokol Hill, 
-						just a 30-minute drive from Kota Kinabalu city. 
-						Enjoy breathtaking views, fresh mountain air, 
-						and a peaceful escape in nature.
-					</p>
-				</div>
-			</div>
-				
 			<div class="col-left">
-					<div style="width: 100%; max-width: 600px; height: 400px; margin: auto;">
+					<div style="width: 800px; height: 600px; margin: auto;">
 						<iframe 
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.863409287196!2d116.20435933898426!3d6.013485428905886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x323b6d1a9ccd4cf9%3A0x128a167f42a6e048!2sKokol%20MamaHill%20Campsite!5e0!3m2!1sen!2smy!4v1737578865854!5m2!1sen!2smy"
 							width="100%" 
@@ -218,6 +210,17 @@ include("config/config.php");
 						</iframe>
 					</div>
 			</div>
+			<div class="col-right">
+				<div class="Location-box">
+					<h2>Find Us Here At Kokol Hill</h2>
+					<p> Mamahillcamp is located at Kokol Hill, 
+						just a 30-minute drive from Kota Kinabalu city. 
+						Enjoy breathtaking views, fresh mountain air, 
+						and a peaceful escape in nature.
+					</p>
+				</div>
+			</div>
+				
 		</div>
 		</section>
 		
